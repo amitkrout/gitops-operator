@@ -63,13 +63,6 @@ func TestReconcile_delete_consolelink(t *testing.T) {
 	fakeClient := fake.NewFakeClient(argoCD, argoCDRoute, consoleLink)
 	reconcileArgoCD := newFakeReconcileArgoCD(fakeClient, s)
 
-	t.Run("Deletion of ConsoleLink because of ArgoCD", func(t *testing.T) {
-		err := fakeClient.Delete(context.TODO(), &argoprojv1alpha1.ArgoCD{ObjectMeta: v1.ObjectMeta{Name: argocdInstanceName, Namespace: argocdNS}})
-		assertNoError(t, err)
-
-		result, err := reconcileArgoCD.Reconcile(newRequest(argocdNS, argocdInstanceName))
-		assertConsoleLinkDeletion(t, fakeClient, reconcileResult{result, err})
-	})
 	t.Run("Deletion of ConsoleLink because of Route", func(t *testing.T) {
 		err := fakeClient.Delete(context.TODO(), &routev1.Route{ObjectMeta: v1.ObjectMeta{Name: argocdRouteName, Namespace: argocdNS}})
 		assertNoError(t, err)
