@@ -88,7 +88,7 @@ func assertNoError(t *testing.T, err error) {
 
 func addKnownTypesToScheme(scheme *runtime.Scheme) {
 	scheme.AddKnownTypes(argoprojv1alpha1.SchemeGroupVersion, &argoprojv1alpha1.ArgoCD{})
-	scheme.AddKnownTypes(routev1.GroupVersion, &routev1.Route{})
+	scheme.AddKnownTypes(routev1.SchemeGroupVersion, &routev1.Route{})
 	scheme.AddKnownTypes(console.GroupVersion, &console.ConsoleLink{})
 }
 
